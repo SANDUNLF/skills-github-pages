@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>产品利润计算器</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f4f7fa;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #result {
+      margin-top: 30px;
+      font-size: 18px;
+      color: #28a745;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>产品利润计算器 💰</h2>
+
+  <label for="usdPrice">收款金额（USD）</label>
+  <input type="number" id="usdPrice" placeholder="如：39.99">
+
+  <label for="cost">采购成本（￥）</label>
+  <input type="number" id="cost" placeholder="如：65">
+
+  <label for="shipping">物流成本（￥）</label>
+  <input type="number" id="shipping" placeholder="如：20">
+
+  <button onclick="calculateProfit()">计算利润</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateProfit() {
+      const rate = 7.2;
+      const usd = parseFloat(document.getElementById('usdPrice').value);
+      const cost = parseFloat(document.getElementById('cost').value);
+      const shipping = parseFloat(document.getElementById('shipping').value);
+
+      if (isNaN(usd) || isNaN(cost) || isNaN(shipping)) {
+        document.getElementById('result').innerHTML = "请填写所有字段 👀";
+        return;
+      }
+
+      const revenueCNY = usd * rate;
+      const profit = revenueCNY - cost - shipping;
+
+      document.getElementById('result').innerHTML = `预计利润为：<strong>￥${profit.toFixed(2)}</strong>`;
+    }
+  </script>
+</body>
+</html>
